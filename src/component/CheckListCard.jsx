@@ -2,7 +2,7 @@ import React from "react";
 
 const ChecklistCard = ({
   title = "Project Checklist",
-  status = "In Progress",
+  status = "not yet",
   description = "Complete all project related tasks ",
   completedTasks = 2,
   totalTasks = 5,

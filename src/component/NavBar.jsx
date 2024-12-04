@@ -4,11 +4,11 @@ const NavBar = () => {
   const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
-    navigate("/"); // Navigate to the Dashboard
+    navigate("/"); 
   };
   const handleNewClClick = (e) => {
     e.preventDefault();
-    navigate("/form"); // Navigate to the Form page
+    navigate("/form"); 
   };
 
   return (
@@ -33,7 +33,9 @@ const NavBar = () => {
 };
 
 const Logo = () => {
-  return <img className="w-24" src="/Logo.svg" alt="Website logo" />;
+  return (
+    <img className="w-12 cursor-pointer" src="/Logo.svg" alt="Website logo" />
+  );
 };
 
 export default NavBar;

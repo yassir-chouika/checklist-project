@@ -1,33 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Checklist from "./pages/Checklist";
-import NavBar from "./component/NavBar";
+import { useState } from "react";
+import DashBoard from "./pages/DashBoard";
+import Checklist from "./pages/CheckList";
 import Form from "./pages/Form";
-import ChecklistCard from "./component/CheckListCard";
-import TaskCard from "./component/TaskCard";
-import FormDraft from "./component/FormForge";
+import FormForge from "./component/FormForge";
+import NavBar from "./component/NavBar";
 
 function App() {
-  // request to api where you get all the tasks
-
-  const tasks = [
-    {
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-    {
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-    {
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-    {
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-  ];
+  const [checklists, setChecklists] = useState([]);
+  // to add a new checklist
+  const addChecklist = (newChecklist) => {
+    setChecklists([...checklists, newChecklist]);
+  };
 
   return (
     <BrowserRouter>
@@ -35,9 +19,16 @@ function App() {
         <NavBar />
       </header>
 
-      {/* <Checklist /> */}
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        {/* Pass checklists to Dashboard */}
+        <Route path="/" element={<DashBoard checklists={checklists} />} />
+
+        {/* Pass addChecklist to FormForge */}
+        <Route
+          path="/form"
+          element={<FormForge addChecklist={addChecklist} />}
+        />
+
         <Route path="/checklist" element={<Checklist />} />
         <Route path="/form" element={<Form />} />
       </Routes>

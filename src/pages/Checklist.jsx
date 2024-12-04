@@ -1,38 +1,28 @@
+import React from "react";
+import { useParams } from "react-router-dom";
 import TaskCard from "../component/TaskCard";
-import uniqid from 'uniqid';
 
-function Checklist() {
-  
-  const tasks = [
-    {
-      id : uniqid(),
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-    {
-      id : uniqid(),
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-    {
-      id : uniqid(),
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-    {
-      id : uniqid(),
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem suscipit dolor eligendi! ",
-    },
-  ];
+const TaskList =({ checklists }) => {
+  const { id } = useParams();
+  const checklist = checklists.find((item) => item.id === parseInt(id));
+
+  if (!checklist) return <p>Checklist not found!</p>;
+
   return (
     <div>
-      <h1>Checklist</h1>
-      {tasks.map((task) => (
-        <TaskCard key={task.id} description={task.description} />
-      ))}
+      <h2>{checklist.title}</h2>
+      <p>{checklist.description}</p>
+      <div>
+        {checklist.tasks.length === 0 ? (
+          <p>No tasks available.</p>
+        ) : (
+          checklist.tasks.map((task) => (
+            <TaskCard key={task.id} description={task.title} />
+          ))
+        )}
+      </div>
     </div>
   );
 }
 
-export default Checklist;
+export default TaskList;

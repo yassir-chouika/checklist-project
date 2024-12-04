@@ -1,14 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
 
-const FormForge = () => {
+const FormForge = ({ addChecklist }) => {
+  const [items, setItems] = useState([]); // State for storing all content items
+  const [newContent, setNewContent] = useState(""); // State for the new content input field
+  const [title, setTitle] = useState(""); // State for title
+  const [description, setDescription] = useState(""); // State for description
 
-  // State for storing all content items
-  const [items, setItems] = useState([]);
-  // State for the new content input field
-  const [newContent, setNewContent] = useState("");
-
-  // Adds a new item to the items array if content isn't empty
+  // Adds a new item to the items array
   const addItem = () =>
     (newContent.trim() &&
       setItems([...items, { id: uniqid(), content: newContent }])) ||
@@ -24,29 +24,53 @@ const FormForge = () => {
         item.id === id ? { ...item, content: newValue } : item
       )
     );
+ 
+    const Navigate = useNavigate()
+  const handleSave = () => {
+    // Create a new checklist object
+    const newChecklist = {
+      title,
+      description,
+      tasks: items,
+      id: uniqid(),
+    };
+
+    addChecklist(newChecklist);
+
+    // Reseting the form
+    setTitle("");
+    setDescription("");
+    setItems([]);
+    alert("Checklist has been added successfully.");
+    Navigate('/')
+  };
+    
 
   return (
-    <div className="m-2 p-4 rounded-2xl bg-white ">
-      <div className="flex flex-col justify-center gap-3 ">
+    <div className="m-2 p-4 rounded-2xl bg-white laptop:mx-20 laptop:p-10 laptop:flex laptop:justify-center laptop:flex-col ">
+      <div className="flex flex-col items-center gap-3 ">
         <label htmlFor="Title">
           <input
-            id=""
+            value={title}
             name="Title"
             type="text"
             placeholder="Title"
-            className=" block flex-1 border-2 rounded-lg bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400  sm:text-sm/6"
+            onChange={(e) => setTitle(e.target.value)} // Update state on input change
+            className=" block flex-1 border-2 rounded-lg bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 sm:text-sm/6"
           />
         </label>
 
         <textarea
-          className="w-full block flex-1 border-2 rounded-lg bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400  sm:text-sm/6"
-          placeholder="Description"
+          value={description}
           name="Description"
-          id=""
+          type="text"
+          placeholder="Description"
+          onChange={(e) => setDescription(e.target.value)} // Update state on input change
+          className="w-full block flex-1 border-2 rounded-lg bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400  sm:text-sm/6"
         ></textarea>
       </div>
       {/* Input section for adding new items */}
-      <div className=" w-full flex mt-4 justify-center gap-3">
+      <div className=" w-full flex mt-4 gap-3">
         <button
           onClick={addItem}
           className="max-w-48 bg-paletteYellow font-bold text-white px-4 py-2 rounded-md hover:bg-amber-200"
@@ -63,7 +87,7 @@ const FormForge = () => {
       </div>
 
       {/* Container for all content items */}
-      <div className="space-y-4">
+      <div className=" laptop:flex laptop:flex-row laptop:flex-wrap laptop:w-full laptop:gap-x-4 laptop:p-3 ">
         {items.map((item) => (
           <ContentItem
             key={item.id}
@@ -73,32 +97,40 @@ const FormForge = () => {
           />
         ))}
       </div>
+      <div className="flex flex-col items-center ">
+        <button
+           onClick={handleSave}
+          className="max-w-48 bg-paletteYellow font-bold text-white px-4 py-2 rounded-md hover:bg-amber-200 mt-5 ms-center "
+        >
+          Save
+        </button>
+      </div>
     </div>
   );
 };
 
-// Subcomponent for individual content items
 const ContentItem = ({ item, onDelete, onModify }) => {
-  // State to track if item is being edited
-  const [isEditing, setIsEditing] = useState(false);
-  // State to store the content while editing
-  const [editContent, setEditContent] = useState(item.content);
 
-  // Saves the edited content if it's not empty
-  const handleSave = () =>
-    (editContent.trim() && onModify(item.id, editContent)) ||
-    setIsEditing(false);
+  const [isEditing, setIsEditing] = useState(false); // State to track if item is being edited
+  const [editContent, setEditContent] = useState(item.content); // State to store the content while editing
+
+  const handleModify = () => {
+    if (editContent.trim()) {
+      onModify(item.id, editContent);
+      setIsEditing(false);
+    }
+  };
 
   return (
     <div className="flex flex-col p-4 mt-4 border-y bg-white rounded-lg shadow hover:shadow-md transition-shadow ">
-      {/* Content display: shows input field when editing, text when not */}
+      {/* shows input field when editing, text when not */}
       {isEditing ? (
         <input
           type="text"
           value={editContent}
           onChange={(e) => setEditContent(e.target.value)}
-          onBlur={handleSave}
-          onKeyDown={(e) => e.key === "Enter" && handleSave()}
+          onBlur={handleModify}
+          onKeyDown={(e) => e.key === "Enter" && handleModify()}
           className="flex-1 p-1 border rounded mr-4"
           autoFocus
         />
@@ -111,7 +143,7 @@ const ContentItem = ({ item, onDelete, onModify }) => {
       {/* Action buttons */}
       <div className="flex justify-center gap-2 mt-3">
         <button
-          onClick={() => (isEditing ? handleSave() : setIsEditing(true))}
+          onClick={() => (isEditing ? handleModify() : setIsEditing(true))}
           className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
         >
           {isEditing ? "Save" : "Modify"}

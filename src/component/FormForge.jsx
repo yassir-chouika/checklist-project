@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
-const FormForge = ({ addChecklist }) => {
+const FormForge = ({ addChecklist, setChecklists }) => {
+  const location = useLocation();
+  const checklistToEdit = location.state || null;
+
   const [items, setItems] = useState([]); // State for storing all content items
   const [newContent, setNewContent] = useState(""); // State for the new content input field
-  const [title, setTitle] = useState(""); 
-  const [description, setDescription] = useState(""); 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  // Populate the form fields if there's a checklist to edit
+  useEffect(() => {
+    if (checklistToEdit) {
+      setItems(checklistToEdit.tasks || []);
+      setTitle(checklistToEdit.title || "");
+      setDescription(checklistToEdit.description || "");
+    }
+  }, [checklistToEdit]);
 
   // Adds a new item to the items array
   const addItem = () =>
@@ -24,27 +38,34 @@ const FormForge = ({ addChecklist }) => {
         item.id === id ? { ...item, content: newValue } : item
       )
     );
- 
-    const Navigate = useNavigate()
+
+  const Navigate = useNavigate();
   const handleSave = () => {
     // Create a new checklist object
     const newChecklist = {
       title,
       description,
       tasks: items,
-      id: uniqid(),
+      id: checklistToEdit ? checklistToEdit.id : uniqid(), // Keep the same ID if editing
     };
 
-    addChecklist(newChecklist);
+    if (checklistToEdit) {
+      // Update an existing checklist
+      setChecklists((prev) =>
+        prev.map((item) => (item.id === newChecklist.id ? newChecklist : item))
+      );
+    } else {
+      // Add a new checklist
+      addChecklist(newChecklist);
+    }
 
     // Reseting the form
     setTitle("");
     setDescription("");
     setItems([]);
     alert("Checklist has been added successfully.");
-    Navigate('/')
+    Navigate("/");
   };
-    
 
   return (
     <div className="m-2 p-4 rounded-2xl bg-white laptop:mx-20 laptop:p-10 laptop:flex laptop:justify-center laptop:flex-col ">
@@ -99,7 +120,7 @@ const FormForge = ({ addChecklist }) => {
       </div>
       <div className="flex flex-col items-center ">
         <button
-           onClick={handleSave}
+          onClick={handleSave}
           className="max-w-48 bg-paletteYellow font-bold text-white px-4 py-2 rounded-md hover:bg-amber-200 mt-5 ms-center "
         >
           Save
@@ -110,7 +131,6 @@ const FormForge = ({ addChecklist }) => {
 };
 
 const ContentItem = ({ item, onDelete, onModify }) => {
-
   const [isEditing, setIsEditing] = useState(false); // State to track if item is being edited
   const [editContent, setEditContent] = useState(item.content); // State to store the content while editing
 

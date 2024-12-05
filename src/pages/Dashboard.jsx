@@ -2,17 +2,19 @@ import React from "react";
 import ChecklistCard from "../component/CheckListCard";
 import { useNavigate } from "react-router-dom";
 
-const DashBoard = ({ checklists }) => {
+const DashBoard = ({ checklists, setChecklists }) => {
   const handleCardClick = (id) => {
     navigate(`/checklist/${id}`);
   };
 
   const handleDelete = (id) => {
-    alert(`Delete checklist with id: ${id}`);
+    if (window.confirm("Are you sure you want to delete this checklist?")) {
+      setChecklists(checklists.filter((checklist) => checklist.id !== id));
+    }
   };
 
-  const handleModify = (id) => {
-    alert(`Modify checklist with id: ${id}`);
+  const handleModify = (checklist) => {
+    navigate("/form", { state: checklist });
   };
 
   const navigate = useNavigate();
@@ -50,7 +52,7 @@ const DashBoard = ({ checklists }) => {
             totalTasks={checklist.tasks.length}
             status={checklist.status || "not yet"}
             onDelete={() => handleDelete(checklist.id)}
-            onModify={() => handleModify(checklist.id)}
+            onModify={() => handleModify(checklist)}
             onClick={() => handleCardClick(checklist.id)}
           />
         ))

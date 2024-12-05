@@ -19,10 +19,20 @@ function App() {
       </header>
 
       <Routes>
-        <Route path="/" element={<DashBoard checklists={checklists} />} />
+        <Route
+          path="/"
+          element={
+            <DashBoard checklists={checklists} setChecklists={setChecklists} />
+          }
+        />
         <Route
           path="/form"
-          element={<FormForge addChecklist={addChecklist} />}
+          element={
+            <FormForge
+              addChecklist={addChecklist}
+              setChecklists={setChecklists}
+            />
+          }
         />
         <Route
           path="/checklist/:id"

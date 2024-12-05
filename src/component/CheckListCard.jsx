@@ -72,11 +72,11 @@ const ChecklistCard = ({
                 </svg>
                 Modify
               </button>
-              
+
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onDelete();
+                  onDelete(); // Trigger the deletion only if confirmed
                 }}
                 className="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[white] bg-[#ff3939] rounded-md hover:bg-[#ff5555] "
               >

@@ -3,6 +3,10 @@ import ChecklistCard from "../component/CheckListCard";
 import { useNavigate } from "react-router-dom";
 
 const DashBoard = ({ checklists }) => {
+  const handleCardClick = (id) => {
+    navigate(`/checklist/${id}`);
+  };
+
   const handleDelete = (id) => {
     alert(`Delete checklist with id: ${id}`);
   };
@@ -44,9 +48,10 @@ const DashBoard = ({ checklists }) => {
               checklist.tasks.filter((task) => task.completed).length
             }
             totalTasks={checklist.tasks.length}
-            status={checklist.status || "In Progress"}
+            status={checklist.status || "not yet"}
             onDelete={() => handleDelete(checklist.id)}
             onModify={() => handleModify(checklist.id)}
+            onClick={() => handleCardClick(checklist.id)}
           />
         ))
       )}

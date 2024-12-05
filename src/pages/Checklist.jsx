@@ -2,9 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import TaskCard from "../component/TaskCard";
 
-const TaskList =({ checklists }) => {
+const Checklist = ({ checklists }) => {
   const { id } = useParams();
-  const checklist = checklists.find((item) => item.id === parseInt(id));
+
+  // Find the checklist by ID
+  const checklist = checklists.find((item) => item.id === id);
 
   if (!checklist) return <p>Checklist not found!</p>;
 
@@ -13,16 +15,16 @@ const TaskList =({ checklists }) => {
       <h2>{checklist.title}</h2>
       <p>{checklist.description}</p>
       <div>
-        {checklist.tasks.length === 0 ? (
+        {checklist.tasks && checklist.tasks.length === 0 ? (
           <p>No tasks available.</p>
         ) : (
           checklist.tasks.map((task) => (
-            <TaskCard key={task.id} description={task.title} />
+            <TaskCard key={task.id} description={task.content} />
           ))
         )}
       </div>
     </div>
   );
-}
+};
 
-export default TaskList;
+export default Checklist;

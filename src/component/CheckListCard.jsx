@@ -1,13 +1,14 @@
 import React from "react";
 
 const ChecklistCard = ({
-  title = "Project Checklist",
-  status = "not yet",
-  description = "Complete all project related tasks ",
-  completedTasks = 2,
-  totalTasks = 5,
-  onDelete = () => {},
-  onModify = () => {},
+  title,
+  description,
+  completedTasks,
+  totalTasks,
+  status,
+  onDelete,
+  onModify,
+  onClick,
 }) => {
   // Function to determine status color
   const getStatusColor = (status) => {
@@ -25,9 +26,11 @@ const ChecklistCard = ({
 
   return (
     <div className="pt-3">
-      <div className="w-full p-4 bg-white rounded-2xl border border-gray-200 tablet:flex tablet:flex-row tablet:w-72 ">
+      <div
+        onClick={onClick}
+        className="w-full p-4 bg-white rounded-2xl border border-gray-200 tablet:flex tablet:flex-row tablet:w-72 cursor-pointer"
+      >
         <div className="flex flex-col gap-5">
-          {/* Checklist's header section */}
           <div className="flex justify-between items-start">
             <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
             <span
@@ -39,23 +42,20 @@ const ChecklistCard = ({
             </span>
           </div>
 
-          {/* Checklist's description section */}
           <p className="text-gray-600">{description}</p>
 
-          {/* Checklist's footer section */}
           <div className="flex justify-between items-center mt-2">
-            {/* Task counter */}
             <span className="text-sm text-gray-500">
               {completedTasks} / {totalTasks} tasks completed
             </span>
-
-            {/* Action buttons */}
             <div className="flex gap-2">
               <button
-                onClick={onModify}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onModify();
+                }}
                 className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#666666] bg-white border border-gray-300 rounded-md hover:bg-[#e6e6e6] "
               >
-                {/* SVG modify icon */}
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -72,11 +72,14 @@ const ChecklistCard = ({
                 </svg>
                 Modify
               </button>
+              
               <button
-                onClick={onDelete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete();
+                }}
                 className="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[white] bg-[#ff3939] rounded-md hover:bg-[#ff5555] "
               >
-                {/* SVG delete icon  */}
                 <svg
                   className="w-4 h-4"
                   fill="none"

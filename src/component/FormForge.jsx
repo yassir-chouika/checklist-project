@@ -5,8 +5,8 @@ import uniqid from "uniqid";
 const FormForge = ({ addChecklist }) => {
   const [items, setItems] = useState([]); // State for storing all content items
   const [newContent, setNewContent] = useState(""); // State for the new content input field
-  const [title, setTitle] = useState(""); // State for title
-  const [description, setDescription] = useState(""); // State for description
+  const [title, setTitle] = useState(""); 
+  const [description, setDescription] = useState(""); 
 
   // Adds a new item to the items array
   const addItem = () =>

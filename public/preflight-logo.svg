@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 35">
-  <!-- Background Elements (Checklist Icon) -->
   <rect x="10" y="2" width="20" height="20" fill="#FFD166" rx="2"/>
   <rect x="15" y="7" width="10" height="2" fill="white"/>
   <rect x="15" y="11" width="8" height="2" fill="white"/>
   <rect x="15" y="15" width="6" height="2" fill="white"/>
-  <!-- Text -->
   <text x="40" y="17" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="white">PRE-FLIGHT</text>
   <text x="40" y="17" dy="12" font-family="Arial, sans-serif" font-size="12" font-weight="500" fill="#FFD166">CHECKLIST</text>
 </svg>

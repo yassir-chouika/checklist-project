@@ -9,9 +9,9 @@ const TaskCard = ({ description }) => {
   return (
     <div
       onClick={handleClick}
-      className={`w-full max-w-xs p-4 border-solid border-8 transition-colors duration-500 ${
+      className={`w-full max-w-xs p-4 border-solid border-4 text-center transition-colors duration-500 ${
         isClicked ? "border-green-600" : "border-red-600"
-      } bg-white rounded-2xl tablet:flex tablet:flex-row tablet:w-72 cursor-pointer transition-transform duration-300 hover:-translate-y-2`}
+      } bg-white rounded-2xl tablet:flex tablet:flex-row tablet:w-72 cursor-pointer transition-transform duration-300 hover:-translate-y-2 break-words overflow-wrap-anywhere`}
     >
       {description}
     </div>

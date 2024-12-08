@@ -13,7 +13,7 @@ const FormForge = ({ addChecklist, setChecklists }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // Populate the form fields if there's a checklist to edit
+
   useEffect(() => {
     if (checklistToEdit) {
       setItems(checklistToEdit.tasks || []);

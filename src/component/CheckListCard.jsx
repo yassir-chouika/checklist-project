@@ -25,7 +25,7 @@ const ChecklistCard = ({
   };
 
   return (
-    <div className="pt-3">
+    <div className="pt-3 break-words overflow-wrap-anywhere">
       <div
         onClick={onClick}
         className="w-full p-4 bg-white rounded-2xl border border-gray-200 tablet:flex tablet:flex-row tablet:w-72 cursor-pointer"
@@ -42,7 +42,7 @@ const ChecklistCard = ({
             </span>
           </div>
 
-          <p className="text-gray-600">{description}</p>
+          <p className="text-gray-600 laptop:flex-wrap">{description}</p>
 
           <div className="flex justify-between items-center mt-2">
             <span className="text-sm text-gray-500">
@@ -78,7 +78,7 @@ const ChecklistCard = ({
                   e.stopPropagation();
                   onDelete(); // Trigger the deletion only if confirmed
                 }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[white] bg-[#ff3939] rounded-md hover:bg-[#ff5555] "
+                className="flex items-center gap-1 px-3 py-2 text-sm font-bold text-[white] bg-paletteRed rounded-md hover:bg-[#f86a6a] "
               >
                 <svg
                   className="w-4 h-4"

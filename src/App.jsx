@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import DashBoard from "./pages/DashBoard";
+import DashBoard from "./pages/DashBoard.jsx";
 import Checklist from "./pages/CheckList";
 import FormForge from "./component/FormForge";
 import NavBar from "./component/NavBar";

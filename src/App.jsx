@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import DashBoard from "./pages/DashBoard.jsx";
-import Checklist from "./pages/CheckList";
-import FormForge from "./component/FormForge";
-import NavBar from "./component/NavBar";
-import Footer from "./component/Footer";
+import CheckList from "./pages/CheckList.jsx";
+import FormForge from "./component/FormForge.jsx";
+import NavBar from "./component/NavBar.jsx";
+import Footer from "./component/Footer.jsx";
 
 function App() {
   const [checklists, setChecklists] = useState([]);
@@ -41,7 +41,7 @@ function App() {
             />
             <Route
               path="/checklist/:id"
-              element={<Checklist checklists={checklists} />}
+              element={<CheckList checklists={checklists} />}
             />
           </Routes>
         </main>

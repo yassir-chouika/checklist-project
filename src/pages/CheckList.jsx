@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TaskCard from "../component/TaskCard";
 
-const Checklist = ({ checklists }) => {
+const CheckList = ({ checklists }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const handleGoBack = () => {
@@ -42,4 +42,4 @@ const Checklist = ({ checklists }) => {
   );
 };
 
-export default Checklist;
+export default CheckList;

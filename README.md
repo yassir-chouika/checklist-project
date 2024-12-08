@@ -1,19 +1,23 @@
-# Checklist Project
+# Check List Project
 
-A web app designed to help users create and manage checklists efficiently. The project includes a clean, responsive design that adapts across different devices.
+## Overview
+
+This project is a checklist web app created using React. It is designed to help users manage tasks efficiently with an intuitive interface. The app allows users to create, edit, and delete tasks, making it a valuable tool for personal and professional organization.
 
 ## Features
 
-- Create, edit, and delete checklists
-- Add tasks to each checklist with the ability to mark them as completed
-- Visual representation of task progress (completed vs total tasks)
-- Responsive design for a seamless experience across devices
+- Add new tasks to the checklist
+- Edit and delete existing tasks
+- Mark tasks as completed
+- View a clean, responsive interface
+
+## Live Demo
+
+You can view the live web app here: [Check List Project](https://checklist-project.vercel.app/)
 
 ## Figma References
 
-- **Zoning:** Explore the zoning of the app in this Figma design: [Zonning Figma Design](https://www.figma.com/design/Eg23tPTzMogDl5YUqsDnFW/Check-List-Project?node-id=0-1&node-type=canvas&t=62Wq6SPMt3mgCe3t-0)
-- **Wireframe and Mockups:** View the wireframe and mockups for the app: [Wireframe & Mockups Figma Design](https://www.figma.com/design/Eg23tPTzMogDl5YUqsDnFW/Check-List-Project?node-id=31-832&node-type=canvas&t=pO5WabnVzXFT9SSu-0)
+The design and wireframes for the project were created in Figma. You can view them through the following links:
 
-## Web App
-
-Check out the live version of the web app here: [Web App URL](https://checklist-project.vercel.app/)
+- **Zoning:** [Figma Zoning](https://www.figma.com/design/Eg23tPTzMogDl5YUqsDnFW/Check-List-Project?node-id=0-1&node-type=canvas&t=62Wq6SPMt3mgCe3t-0)
+- **Wireframe and Mockups:** [Figma Wireframes and Mockups](https://www.figma.com/design/Eg23tPTzMogDl5YUqsDnFW/Check-List-Project?node-id=31-832&node-type=canvas&t=pO5WabnVzXFT9SSu-0)
